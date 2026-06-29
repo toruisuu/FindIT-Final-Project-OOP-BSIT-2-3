@@ -54,7 +54,6 @@
                         <ComboBox fx:id="statusFilter" prefHeight="38.0" prefWidth="145.0" promptText="Status" style="-fx-background-color: #FFFFFF; -fx-border-color: #CCCCCC; -fx-border-radius: 8;" />
                         <ComboBox fx:id="dateFilter" prefHeight="38.0" prefWidth="150.0" promptText="Date" style="-fx-background-color: #FFFFFF; -fx-border-color: #CCCCCC; -fx-border-radius: 8;" />
                         <DatePicker fx:id="monthPicker" prefHeight="38.0" prefWidth="145.0" promptText="Month" />
-                        <Button mnemonicParsing="false" onAction="#handleShowMatchSuggestions" prefHeight="38.0" prefWidth="190.0" style="-fx-background-color: #FFCC00; -fx-background-radius: 8; -fx-cursor: hand; -fx-text-fill: #4A1212; -fx-font-weight: bold;" text="Match Suggestions" />
                         <Button fx:id="archivedItemsButton" mnemonicParsing="false" onAction="#handleToggleArchivedItems" prefHeight="38.0" prefWidth="185.0" style="-fx-background-color: #800000; -fx-background-radius: 8; -fx-cursor: hand; -fx-text-fill: #FFFFFF; -fx-font-weight: bold;" text="Archived Reports" />
                      </children>
                   </HBox>

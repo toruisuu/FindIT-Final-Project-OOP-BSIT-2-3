@@ -33,9 +33,9 @@ public class AdminSidebarController {
     @FXML private HBox headerBox;
     @FXML private Region headerSpacer;
     @FXML private Label logoText;
-    @FXML private Button btnDashboard, btnReported, btnClaims, btnMatch, btnLogout;
+    @FXML private Button btnDashboard, btnReported, btnMatch, btnClaims, btnLogout;
     @FXML private ImageView logoImage;
-    @FXML private ImageView imgDashboard, imgReported, imgClaims, imgMatch, imgLogout;
+    @FXML private ImageView imgDashboard, imgReported, imgMatch, imgClaims, imgLogout;
 
     @FXML
     public void initialize() {
@@ -68,8 +68,8 @@ public class AdminSidebarController {
 
             setNavButtonExpanded(btnDashboard);
             setNavButtonExpanded(btnReported);
-            setNavButtonExpanded(btnClaims);
             setNavButtonExpanded(btnMatch);
+            setNavButtonExpanded(btnClaims);
             setNavButtonExpanded(btnLogout);
         } else {
             sidebarContainer.setPrefWidth(COLLAPSED_WIDTH);
@@ -86,8 +86,8 @@ public class AdminSidebarController {
 
             setNavButtonCollapsed(btnDashboard);
             setNavButtonCollapsed(btnReported);
-            setNavButtonCollapsed(btnClaims);
             setNavButtonCollapsed(btnMatch);
+            setNavButtonCollapsed(btnClaims);
             setNavButtonCollapsed(btnLogout);
         }
 
@@ -95,9 +95,7 @@ public class AdminSidebarController {
     }
 
     private void setNavButtonExpanded(Button button) {
-        if (button == null) {
-            return;
-        }
+        if (button == null) return;
         button.setContentDisplay(ContentDisplay.LEFT);
         button.setAlignment(Pos.CENTER_LEFT);
         button.setGraphicTextGap(EXPANDED_ICON_GAP);
@@ -108,9 +106,7 @@ public class AdminSidebarController {
     }
 
     private void setNavButtonCollapsed(Button button) {
-        if (button == null) {
-            return;
-        }
+        if (button == null) return;
         button.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
         button.setAlignment(Pos.CENTER);
         button.setGraphicTextGap(0);
@@ -136,38 +132,44 @@ public class AdminSidebarController {
                 + "-fx-cursor: hand; -fx-border-color: transparent; -fx-border-insets: 0; "
                 + "-fx-padding: 0; -fx-focus-color: transparent; -fx-faint-focus-color: transparent;";
 
+        // Reset all buttons to default
         btnDashboard.setStyle(defaultStyle);
         btnReported.setStyle(defaultStyle);
-        btnClaims.setStyle(defaultStyle);
         btnMatch.setStyle(defaultStyle);
+        btnClaims.setStyle(defaultStyle);
         btnLogout.setStyle(defaultStyle);
 
-        imgDashboard.setImage(safeLoadImage("/com/example/findit/assets/dashboard.png"));
-        imgReported.setImage(safeLoadImage("/com/example/findit/assets/ItemReportedAdmin.png"));
-        imgClaims.setImage(safeLoadImage("/com/example/findit/assets/claim.png"));
-        imgMatch.setImage(safeLoadImage("/com/example/findit/assets/MatchSuggestion.png"));
-        imgLogout.setImage(safeLoadImage("/com/example/findit/assets/logout.png"));
-
+        // Reset all icons to white
         ColorAdjust makeWhite = new ColorAdjust();
         makeWhite.setBrightness(1.0);
+        imgDashboard.setImage(safeLoadImage("/com/example/findit/assets/dashboard.png"));
+        imgReported.setImage(safeLoadImage("/com/example/findit/assets/ItemReportedAdmin.png"));
+        imgMatch.setImage(safeLoadImage("/com/example/findit/assets/MatchSuggestion.png"));
+        imgClaims.setImage(safeLoadImage("/com/example/findit/assets/claim.png"));
+        imgLogout.setImage(safeLoadImage("/com/example/findit/assets/logout.png"));
         imgDashboard.setEffect(makeWhite);
         imgReported.setEffect(makeWhite);
-        imgClaims.setEffect(makeWhite);
         imgMatch.setEffect(makeWhite);
+        imgClaims.setEffect(makeWhite);
         imgLogout.setEffect(makeWhite);
 
+        // Highlight the active tab
         switch (tabName) {
             case "Dashboard":
-                activateTab(btnDashboard, imgDashboard, "/com/example/findit/assets/yellow_icons/dashboard.png", activeStyle);
+                activateTab(btnDashboard, imgDashboard,
+                        "/com/example/findit/assets/yellow_icons/dashboard.png", activeStyle);
                 break;
             case "Reported":
-                activateTab(btnReported, imgReported, "/com/example/findit/assets/yellow_icons/ItemReportedAdmin.png", activeStyle);
-                break;
-            case "Claims":
-                activateTab(btnClaims, imgClaims, "/com/example/findit/assets/yellow_icons/ClaimsAdmin.png", activeStyle);
+                activateTab(btnReported, imgReported,
+                        "/com/example/findit/assets/yellow_icons/ItemReportedAdmin.png", activeStyle);
                 break;
             case "Match":
-                activateTab(btnMatch, imgMatch, "/com/example/findit/assets/yellow_icons/MatchSuggestion.png", activeStyle);
+                activateTab(btnMatch, imgMatch,
+                        "/com/example/findit/assets/yellow_icons/MatchSuggestion.png", activeStyle);
+                break;
+            case "Claims":
+                activateTab(btnClaims, imgClaims,
+                        "/com/example/findit/assets/yellow_icons/ClaimsAdmin.png", activeStyle);
                 break;
             default:
                 break;
@@ -175,9 +177,7 @@ public class AdminSidebarController {
     }
 
     private void activateTab(Button button, ImageView icon, String iconPath, String style) {
-        if (button == null || icon == null) {
-            return;
-        }
+        if (button == null || icon == null) return;
         button.setStyle(style);
         icon.setImage(safeLoadImage(iconPath));
         icon.setEffect(null);
@@ -191,12 +191,12 @@ public class AdminSidebarController {
         navigateTo(event, "/com/example/findit/views/admin/ReportedItems.fxml", "Reports", "Reported");
     }
 
-    @FXML private void goToClaims(ActionEvent event) {
-        navigateTo(event, "/com/example/findit/views/admin/Claims.fxml", "Claims", "Claims");
-    }
-
     @FXML private void goToMatchSuggestions(ActionEvent event) {
         navigateTo(event, "/com/example/findit/views/admin/MatchSuggestionPanel.fxml", "Match Suggestions", "Match");
+    }
+
+    @FXML private void goToClaims(ActionEvent event) {
+        navigateTo(event, "/com/example/findit/views/admin/Claims.fxml", "Claims", "Claims");
     }
 
     @FXML
